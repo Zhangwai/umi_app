@@ -3,8 +3,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Tag, Space } from 'antd';
 import type { ProColumns } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import { getAllPerson } from '@/services/ant-design-pro/api';
 import { connect } from 'dva';
+import { useEffect, useState } from 'react';
 const columns: ProColumns<GithubIssueItem>[] = [
     {
         title: '姓名',
@@ -17,20 +17,18 @@ const columns: ProColumns<GithubIssueItem>[] = [
     },
 ];
 
-console.log(connect)
 const Person = (props: any) => {
-    
-    const personList = async () => {
-        const data = await getAllPerson();
-        return { data }
-    }
+    // console.log(props)
+    const { personModel, getPerson } = props
+    useEffect(() => {
+        getPerson()
+    }, [])
+    // console.log('render')
     return (
         <PageContainer>
             <ProTable<GithubIssueItem>
                 columns={columns}
-                request={async (params = {}) =>
-                    personList()
-                }
+                dataSource={personModel.person}
                 rowKey="id"
                 search={{
                     labelWidth: 'auto',
@@ -52,5 +50,17 @@ const Person = (props: any) => {
         </PageContainer>
     )
 }
-export default Person;
-// export default connect(mapStateToProps, mapDispatchToProps)(Person);
+
+const mapStateToProps = ({ personModel }: any) => {
+    return {
+        personModel
+    }
+}
+const mapDispatchToProps = (dispatch: Function) => {
+    return {
+        getPerson: (params: any) =>
+            dispatch({ type: 'personModel/fetchAllPerson', payload: params }),
+    }
+}
+// export default Person;
+export default connect(mapStateToProps, mapDispatchToProps)(Person);

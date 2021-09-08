@@ -1,15 +1,16 @@
-import React, { useCallback } from 'react';
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Menu, Spin } from 'antd';
+import React, { useCallback, useState, useEffect } from 'react';
+import { LogoutOutlined, SettingOutlined, UserOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { Avatar, Menu, Spin, Badge } from 'antd';
 import { history, useModel } from 'umi';
 import { stringify } from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import { outLogin } from '@/services/ant-design-pro/api';
 import type { MenuInfo } from 'rc-menu/lib/interface';
-
+import { connect } from 'dva';
 export type GlobalHeaderRightProps = {
   menu?: boolean;
+  todoModel?: Array<object>;
 };
 
 /**
@@ -30,15 +31,30 @@ const loginOut = async () => {
   }
 };
 
-const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
+const AvatarDropdown: React.FC<GlobalHeaderRightProps> = (props) => {
   const { initialState, setInitialState } = useModel('@@initialState');
-
+  const { menu, todoModel: { todoData } } = props;
+  let count = todoData.filter(item => item.status === 0).length;
+  // console.log(todoData)
+  // const [count, setCount] = useState(0)
+  // useEffect(() => {
+  //   const num = todoData.filter(item => item.status === 0).length;
+  //   console.log(num)
+  //   setCount(() => {
+  //     return num
+  //   })
+  // }, [])
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
       const { key } = event;
+      console.log(event, key)
       if (key === 'logout') {
         setInitialState((s) => ({ ...s, currentUser: undefined }));
         loginOut();
+        return;
+      }
+      if (key === 'todo') {
+        history.push(`/${key}`);
         return;
       }
       history.push(`/account/${key}`);
@@ -83,7 +99,11 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
         </Menu.Item>
       )}
       {menu && <Menu.Divider />}
-
+      <Menu.Item key="todo">
+        <UnorderedListOutlined />
+        待办事项
+        <Badge count={count} overflowCount={99} offset={[10, -5]} />
+      </Menu.Item>
       <Menu.Item key="logout">
         <LogoutOutlined />
         退出登录
@@ -94,10 +114,10 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
         <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-        <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+        <span className={`${styles.name} anticon`}>{currentUser.name}<Badge count={count} dot={true} offset={[5, 0]} /></span>
       </span>
     </HeaderDropdown>
   );
 };
 
-export default AvatarDropdown;
+export default connect(({ todoModel }: any) => ({ todoModel }))(AvatarDropdown);

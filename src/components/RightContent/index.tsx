@@ -10,7 +10,6 @@ export type SiderTheme = 'light' | 'dark';
 
 const GlobalHeaderRight: React.FC = () => {
   const { initialState } = useModel('@@initialState');
-
   if (!initialState || !initialState.settings) {
     return null;
   }
@@ -54,7 +53,7 @@ const GlobalHeaderRight: React.FC = () => {
       >
         <QuestionCircleOutlined />
       </span>
-      <Avatar />
+      <Avatar menu={false}/>
       <SelectLang className={styles.action} />
     </Space>
   );

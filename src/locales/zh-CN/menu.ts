@@ -51,4 +51,5 @@ export default {
   'menu.editor.koni': '拓扑编辑器',
   'menu.person': '大爷管理',
   'menu.ceshi': '测试',
+  'menu.todo': '待办事项',
 };

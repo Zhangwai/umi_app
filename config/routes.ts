@@ -55,6 +55,12 @@
     component:'./Person'
   },
   {
+    path:'/todo',
+    name: 'todo',
+    icon: 'CalendarOutlined',
+    component:'./Todo'
+  },
+  {
     path:'/ceshi',
     name: 'ceshi',
     icon: 'icon-ceshi',
