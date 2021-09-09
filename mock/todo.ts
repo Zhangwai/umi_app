@@ -51,5 +51,16 @@ export default {
             message: '添加代办事项成功'
         }
         res.send(result)
+    },
+    "POST /api/editTodo": (req, res) => {
+        const { id, status } = req.body
+        list.map((item, index) => {
+            if (item.id === id) list[index].status = status;
+        });
+        const result = {
+            status: 200,
+            message: '修改成功'
+        }
+        res.send(result)
     }
 }

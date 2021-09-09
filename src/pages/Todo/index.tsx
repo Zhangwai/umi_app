@@ -7,10 +7,10 @@ import type { ProFormInstance } from '@ant-design/pro-form';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { connect } from 'dva';
 import { Button, Tooltip, Alert, Modal, message } from 'antd';
-import { addToDoLists } from '@/services/ant-design-pro/todo';
+
 const Todo = (props: any) => {
     // console.log(props)
-    const { todoModel, getToDoList } = props;
+    const { todoModel, getToDoList, addToDoLists, editToDoList } = props;
     const [isModalVisible, setIsModalVisible] = useState(false)
     useEffect(() => {
         getToDoList()
@@ -21,7 +21,6 @@ const Todo = (props: any) => {
     }
     //表单验证通过后提交
     const handleFrom = async (params: any) => {
-
         const res = await addToDoLists(params)
         if (res.status === 200) {
             getToDoList()
@@ -30,7 +29,16 @@ const Todo = (props: any) => {
         } else {
             message.error(res.message)
         }
-        // console.log(params)
+    }
+    //改变状态
+    const changeStatus = async (id: number, status: number) => {
+        const res = await editToDoList({ id, status })
+        if (res.status === 200) {
+            getToDoList()
+            message.success(res.message)
+        } else {
+            message.error(res.message)
+        }
     }
     const columns: ProColumns<TableListItem>[] = [
         {
@@ -53,10 +61,10 @@ const Todo = (props: any) => {
         },
         {
             title: '修改状态',
-            render: () => [
-                <a href="#" key={0}>待办 </a>,
-                <a href="#" key={1}>完成 </a>,
-                <a href="#" key={2}>取消 </a>
+            render: (_, record, index) => [
+                record.status !== 0 && <a href="#" key={0} onClick={() => { changeStatus(record.id, 0) }}>待办 </a>,
+                record.status !== 1 && <a href="#" key={1} onClick={() => { changeStatus(record.id, 1) }}>完成 </a>,
+                record.status !== 2 && <a href="#" key={2} onClick={() => { changeStatus(record.id, 2) }}>取消 </a>
             ]
         },
     ];
@@ -102,7 +110,12 @@ const mapStateToProps = ({ todoModel }: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         getToDoList: (params: any) =>
-            dispatch({ type: 'todoModel/fetchToDoList', payload: params })
+            dispatch({ type: 'todoModel/fetchToDoList', payload: params }),
+        addToDoLists: (params: any) =>
+            dispatch({ type: 'todoModel/addToDoList', payload: params }),
+        editToDoList: (params: any) =>
+            dispatch({ type: 'todoModel/editToDoList', payload: params })
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Todo)
