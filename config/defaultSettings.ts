@@ -1,5 +1,4 @@
 import { Settings as LayoutSettings } from '@ant-design/pro-layout';
-
 const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
@@ -12,7 +11,7 @@ const Settings: LayoutSettings & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '你大爷NO.1',
+  title: '你大头NO.1',
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   //引入icon-font到菜单

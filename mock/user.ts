@@ -138,6 +138,15 @@ export default {
       access = 'user';
       return;
     }
+    if (password === '123' && username === 'datou') {
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'user',
+      });
+      access = 'user';
+      return;
+    }
     if (type === 'mobile') {
       res.send({
         status: 'ok',

@@ -6,9 +6,8 @@ export default () => {
   const intl = useIntl();
   const defaultMessage = intl.formatMessage({
     id: 'app.copyright.produced',
-    defaultMessage: '蚂蚁集团体验技术部出品',
+    defaultMessage: '大爷集团体验技术部出品',
   });
-
   const currentYear = new Date().getFullYear();
 
   return (
@@ -16,21 +15,21 @@ export default () => {
       copyright={`${currentYear} ${defaultMessage}`}
       links={[
         {
-          key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
+          key: 'datou',
+          title: '大头',
+          href: '#',
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/Zhangwai',
           blankTarget: true,
         },
         {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
+          key: 'welcome',
+          title: '欢迎关注',
+          href: 'https://github.com/Zhangwai/umi_app',
           blankTarget: true,
         },
       ]}
