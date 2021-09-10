@@ -18,10 +18,12 @@ export type GlobalHeaderRightProps = {
  */
 const loginOut = async () => {
   await outLogin();
+  localStorage.removeItem('currentAuthority')
   const { query = {}, pathname } = history.location;
   const { redirect } = query;
   // Note: There may be security issues, please note
   if (window.location.pathname !== '/user/login' && !redirect) {
+    // 退出登录绑定之前的path在url上
     history.replace({
       pathname: '/user/login',
       search: stringify({

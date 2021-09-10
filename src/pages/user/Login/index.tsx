@@ -52,7 +52,10 @@ const Login: React.FC = () => {
     try {
       // 登录
       const msg = await login({ ...values, type });
+      const { currentAuthority }: any = msg
       if (msg.status === 'ok') {
+        // 把token存到localStorage
+        localStorage.setItem('currentAuthority', currentAuthority)
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
@@ -89,8 +92,8 @@ const Login: React.FC = () => {
         <div className={styles.top}>
           <div className={styles.header}>
             <Link to="/">
-              <img alt="logo" className={styles.logo} src="/logo.svg" />
-              <span className={styles.title}>Ant Design</span>
+              <img alt="logo" className={styles.logo} src="/laotou.svg" />
+              <span className={styles.title}>大头集团</span>
             </Link>
           </div>
           <div className={styles.desc}>

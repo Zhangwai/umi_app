@@ -28,7 +28,7 @@
     path: '/admin',
     name: 'admin',
     icon: 'crown',
-    access: 'canAdmin',
+    access: 'canAdmin', //来自 src/access.ts 的 access函数
     component: './Admin',
     routes: [
       {
@@ -51,18 +51,21 @@
   {
     path:'/person',
     name: 'person',
+    access:'canIdentity',
     icon: 'UserOutlined',
     component:'./Person'
   },
   {
     path:'/todo',
     name: 'todo',
+    access:'canIdentity',
     icon: 'CalendarOutlined',
     component:'./Todo'
   },
   {
     path:'/ceshi',
     name: 'ceshi',
+    access:'canIdentity',
     icon: 'icon-ceshi',
     component:'./Ceshi'
   },

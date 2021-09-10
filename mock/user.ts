@@ -25,6 +25,7 @@ const getAccess = () => {
 let access = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' ? 'admin' : '';
 let data = {
   name: '游客',
+  identity:'',
   avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
   userid: '00000001',
   email: 'antdesign@alipay.com',
@@ -118,6 +119,7 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
+  //登录
   'POST /api/login/account': async (req: Request, res: Response) => {
     const { password, username, type } = req.body;
     await waitTime(2000);
@@ -128,6 +130,9 @@ export default {
         currentAuthority: 'admin',
       });
       access = 'admin';
+      data.name = '游客.01';
+      data.avatar = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
+      data.identity = 'admin';
       return;
     }
     if (password === 'ant.design' && username === 'user') {
@@ -137,17 +142,21 @@ export default {
         currentAuthority: 'user',
       });
       access = 'user';
+      data.name = '游客.02';
+      data.avatar = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
+      data.identity = 'user';
       return;
     }
     if (password === '123' && username === 'datou') {
       res.send({
         status: 'ok',
         type,
-        currentAuthority: 'datou',
+        currentAuthority: 'datou, I am token, happy everyday!!!',
       });
       access = 'datou';
       data.name = '究极管理员大头';
-      data.avatar = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
+      data.avatar = '/laotou.svg';
+      data.identity = 'maxAdmin';
       return;
     }
     if (type === 'mobile') {
@@ -167,6 +176,7 @@ export default {
     });
     access = 'guest';
   },
+  //退出登录
   'POST /api/login/outLogin': (req: Request, res: Response) => {
     access = '';
     res.send({ data: {}, success: true });

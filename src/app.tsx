@@ -6,7 +6,6 @@ import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
-import logo from '../public/laotou.svg'
 import { RequestConfig } from 'umi';
 import { message } from 'antd';
 import { RequestInterceptor, RequestOptionsInit, ResponseError } from 'umi-request';
@@ -17,7 +16,7 @@ const loginPath = '/user/login';
 //请求拦截处理
 const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
   //获取token
-  const token = 'xxx'
+  const token = localStorage.getItem('currentAuthority') || '';
   const authHeader = { Authorization: `Bearer ${token}` };
   return {
     url: `${url}`,
@@ -123,7 +122,6 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
-    logo,
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {

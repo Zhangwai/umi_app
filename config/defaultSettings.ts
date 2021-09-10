@@ -13,7 +13,8 @@ const Settings: LayoutSettings & {
   colorWeak: false,
   title: '你大头NO.1',
   pwa: false,
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  logo: '/laotou.svg',
+  // logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   //引入icon-font到菜单
   iconfontUrl: '//at.alicdn.com/t/font_2789909_s413un7as.js',
 };

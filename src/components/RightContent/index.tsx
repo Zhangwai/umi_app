@@ -1,7 +1,7 @@
 import { Space } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
-import { useModel, SelectLang } from 'umi';
+import { useModel, SelectLang, useAccess, Access } from 'umi';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
@@ -10,6 +10,9 @@ export type SiderTheme = 'light' | 'dark';
 
 const GlobalHeaderRight: React.FC = () => {
   const { initialState } = useModel('@@initialState');
+  // 组件里面拿到权限
+  const access = useAccess();
+  console.log(access)
   if (!initialState || !initialState.settings) {
     return null;
   }
