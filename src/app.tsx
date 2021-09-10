@@ -96,7 +96,8 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser();
+      //拿到登陆成功返回的一些信息
+      const msg = await queryCurrentUser()
       return msg.data;
     } catch (error) {
       history.push(loginPath);
@@ -105,6 +106,7 @@ export async function getInitialState(): Promise<{
   };
   // 如果是登录页面，不执行
   if (history.location.pathname !== loginPath) {
+    //拿到当前登录用户名字头像等信息
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,

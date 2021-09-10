@@ -33,7 +33,14 @@ const loginOut = async () => {
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = (props) => {
   const { initialState, setInitialState } = useModel('@@initialState');
-  const { menu, todoModel: { todoData } } = props;
+  const { menu,todoModel, todoModel: { todoData },dispatch } = props;
+  useEffect(() => {
+    //默认拿到头像旁边的小点
+    dispatch({
+      type: 'todoModel/fetchToDoList',
+      payload: null
+    })
+  }, [])
   let count = todoData.filter(item => item.status === 0).length;
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
@@ -103,8 +110,8 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = (props) => {
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-        <span className={`${styles.name} anticon`}>{currentUser.name}<Badge count={count} dot={true} offset={[5, 0]} /></span>
+        <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />{/* 头像 */}
+        <span className={`${styles.name} anticon`}>{currentUser.name}<Badge count={count} dot={true} offset={[5, 0]} /></span>{/* 名字 */}
       </span>
     </HeaderDropdown>
   );
