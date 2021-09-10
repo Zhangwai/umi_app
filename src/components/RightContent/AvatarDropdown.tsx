@@ -35,19 +35,9 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = (props) => {
   const { initialState, setInitialState } = useModel('@@initialState');
   const { menu, todoModel: { todoData } } = props;
   let count = todoData.filter(item => item.status === 0).length;
-  // console.log(todoData)
-  // const [count, setCount] = useState(0)
-  // useEffect(() => {
-  //   const num = todoData.filter(item => item.status === 0).length;
-  //   console.log(num)
-  //   setCount(() => {
-  //     return num
-  //   })
-  // }, [])
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
       const { key } = event;
-      console.log(event, key)
       if (key === 'logout') {
         setInitialState((s) => ({ ...s, currentUser: undefined }));
         loginOut();
