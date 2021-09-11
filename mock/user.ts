@@ -135,6 +135,7 @@ export default {
         currentAuthority: 'admin',
       });
       access = 'admin';
+      data.access = 'admin';
       data.name = '游客.01';
       data.avatar = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
       data.identity = 'admin';
@@ -147,6 +148,7 @@ export default {
         currentAuthority: 'user',
       });
       access = 'user';
+      data.access = 'user';
       data.name = '游客.02';
       data.avatar = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
       data.identity = 'user';
@@ -159,6 +161,7 @@ export default {
         currentAuthority: 'datou, I am token, happy everyday!!!',
       });
       access = 'datou';
+      data.access = 'datou';
       data.name = '究极管理员大头';
       data.avatar = '/laotou.svg';
       data.identity = 'maxAdmin';
