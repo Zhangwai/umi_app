@@ -23,9 +23,10 @@ const getAccess = () => {
   return access;
 };
 let access = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' ? 'admin' : '';
+//登录用户信息
 let data = {
   name: '游客',
-  identity:'',
+  identity: '',
   avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
   userid: '00000001',
   email: 'antdesign@alipay.com',
@@ -82,7 +83,9 @@ let data = {
 export default {
   // 支持值为 Object 和 Array
   'GET /api/currentUser': (req: Request, res: Response) => {
-    if (!getAccess()) {
+    const { headers } = req;
+    //请求头没有带token都会报错
+    if (!getAccess() && headers.authorization === 'Bearer') {
       res.status(401).send({
         data: {
           isLogin: false,
@@ -90,12 +93,14 @@ export default {
         errorCode: '401',
         errorMessage: '请先登录！',
         success: true,
+        // req_headers:req.headers
       });
       return;
     }
     res.send({
       success: true,
       data,
+      // req_headers:req.headers
     });
   },
   // GET POST 可省略

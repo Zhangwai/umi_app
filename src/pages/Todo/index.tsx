@@ -11,7 +11,7 @@ import { Button, Tooltip, Alert, Modal, message } from 'antd';
 const Todo = (props: any) => {
     // console.log(props)
     const { todoModel, getToDoList, addToDoLists, editToDoList } = props;
-    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [isModalVisible, setIsModalVisible] = useState(false);
     useEffect(() => {
         getToDoList()
     }, [])

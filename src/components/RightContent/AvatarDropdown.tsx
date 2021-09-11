@@ -11,6 +11,7 @@ import { connect } from 'dva';
 export type GlobalHeaderRightProps = {
   menu?: boolean;
   todoModel?: Array<object>;
+  canIdentity?: boolean;
 };
 
 /**
@@ -18,7 +19,8 @@ export type GlobalHeaderRightProps = {
  */
 const loginOut = async () => {
   await outLogin();
-  localStorage.removeItem('currentAuthority')
+  localStorage.removeItem('currentAuthority');
+  localStorage.removeItem('userInfo');
   const { query = {}, pathname } = history.location;
   const { redirect } = query;
   // Note: There may be security issues, please note
@@ -35,7 +37,7 @@ const loginOut = async () => {
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = (props) => {
   const { initialState, setInitialState } = useModel('@@initialState');
-  const { menu,todoModel, todoModel: { todoData },dispatch } = props;
+  const { menu, todoModel, todoModel: { todoData }, dispatch, canIdentity } = props;
   useEffect(() => {
     //默认拿到头像旁边的小点
     dispatch({
@@ -43,7 +45,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = (props) => {
       payload: null
     })
   }, [])
-  let count = todoData.filter(item => item.status === 0).length;
+  let count = todoData.filter((item: any) => item.status === 0).length;
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
       const { key } = event;
@@ -98,11 +100,11 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = (props) => {
         </Menu.Item>
       )}
       {menu && <Menu.Divider />}
-      <Menu.Item key="todo">
+      {canIdentity && <Menu.Item key="todo">
         <UnorderedListOutlined />
         待办事项
         <Badge count={count} overflowCount={99} offset={[10, -5]} />
-      </Menu.Item>
+      </Menu.Item>}
       <Menu.Item key="logout">
         <LogoutOutlined />
         退出登录

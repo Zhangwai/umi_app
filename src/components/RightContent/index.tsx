@@ -11,8 +11,8 @@ export type SiderTheme = 'light' | 'dark';
 const GlobalHeaderRight: React.FC = () => {
   const { initialState } = useModel('@@initialState');
   // 组件里面拿到权限
-  const access = useAccess();
-  console.log(access)
+  const {canIdentity} = useAccess();
+  
   if (!initialState || !initialState.settings) {
     return null;
   }
@@ -56,7 +56,7 @@ const GlobalHeaderRight: React.FC = () => {
       >
         <QuestionCircleOutlined />
       </span>
-      <Avatar menu={true} />
+      <Avatar menu={canIdentity} canIdentity={canIdentity}/>
       <SelectLang className={styles.action} />
     </Space>
   );

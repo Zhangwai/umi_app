@@ -9,6 +9,7 @@ import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import { RequestConfig } from 'umi';
 import { message } from 'antd';
 import { RequestInterceptor, RequestOptionsInit, ResponseError } from 'umi-request';
+import user from 'mock/user';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -95,18 +96,37 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      //拿到登陆成功返回的一些信息
-      const msg = await queryCurrentUser()
-      return msg.data;
+      let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      //用户信息缓存不存在
+      if (!userInfo) {
+        //拿到登陆成功返回的一些信息
+        const msg = await queryCurrentUser();
+        userInfo = msg.data;
+        if (userInfo) localStorage.setItem('userInfo', JSON.stringify(userInfo))
+      }
+      return userInfo;
     } catch (error) {
+      //重定向到登录页面并清除缓存
+      localStorage.removeItem('currentAuthority');
+      localStorage.removeItem('userInfo');
       history.push(loginPath);
     }
     return undefined;
   };
+  // 如果是登录页面，清除缓存
+  // if (history.location.pathname === loginPath) {
+  //   localStorage.removeItem('currentAuthority');
+  //   localStorage.removeItem('userInfo');
+  // }
   // 如果是登录页面，不执行
   if (history.location.pathname !== loginPath) {
     //拿到当前登录用户名字头像等信息
     const currentUser = await fetchUserInfo();
+    console.log({
+      fetchUserInfo,
+      currentUser,
+      settings: {},
+    })
     return {
       fetchUserInfo,
       currentUser,

@@ -7,7 +7,7 @@ import {
   WeiboCircleOutlined,
 } from '@ant-design/icons';
 import { Alert, Space, message, Tabs } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
@@ -36,6 +36,11 @@ const Login: React.FC = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const intl = useIntl();
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('userInfo');
+    if (userInfo) history.goBack()
+  }, [])
 
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
