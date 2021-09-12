@@ -9,7 +9,6 @@ import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import { RequestConfig } from 'umi';
 import { message } from 'antd';
 import { RequestInterceptor, RequestOptionsInit, ResponseError } from 'umi-request';
-import user from 'mock/user';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';

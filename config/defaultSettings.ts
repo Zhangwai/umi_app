@@ -16,7 +16,7 @@ const Settings: LayoutSettings & {
   logo: '/laotou.svg',
   // logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   //引入icon-font到菜单
-  iconfontUrl: '//at.alicdn.com/t/font_2789909_s413un7as.js',
+  iconfontUrl: '//at.alicdn.com/t/font_2789909_einv5mff8hi.js',
 };
 
 export default Settings;

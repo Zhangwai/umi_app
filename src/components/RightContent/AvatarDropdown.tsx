@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { LogoutOutlined, SettingOutlined, UserOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { Avatar, Menu, Spin, Badge } from 'antd';
+import { Avatar, Menu, Spin, Badge, message } from 'antd';
 import { history, useModel } from 'umi';
 import { stringify } from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
@@ -23,6 +23,7 @@ const loginOut = async () => {
   localStorage.removeItem('userInfo');
   const { query = {}, pathname } = history.location;
   const { redirect } = query;
+  message.success('退出登录');
   // Note: There may be security issues, please note
   if (window.location.pathname !== '/user/login' && !redirect) {
     // 退出登录绑定之前的path在url上

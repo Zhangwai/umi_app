@@ -63,6 +63,13 @@
     component:'./Todo'
   },
   {
+    path:'/dashboard',
+    name: 'dashboard',
+    access:'canIdentity',
+    icon: 'BarChartOutlined',
+    component:'./Dashboard'
+  },
+  {
     path:'/ceshi',
     name: 'ceshi',
     access:'canIdentity',
