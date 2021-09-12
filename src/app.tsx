@@ -121,11 +121,6 @@ export async function getInitialState(): Promise<{
   if (history.location.pathname !== loginPath) {
     //拿到当前登录用户名字头像等信息
     const currentUser = await fetchUserInfo();
-    console.log({
-      fetchUserInfo,
-      currentUser,
-      settings: {},
-    })
     return {
       fetchUserInfo,
       currentUser,
