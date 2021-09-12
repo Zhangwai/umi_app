@@ -19,6 +19,26 @@
     ],
   },
   {
+    path: '/account',
+    component: '../components/AccountLayout',
+    layout: false,
+    routes: [
+      {
+        name: 'account.center',
+        path: '/account/center',
+        component: './user/Center',
+      },
+      {
+        name: 'account.settings',
+        path: '/account/settings',
+        component: './user/Settings',
+      },
+      {
+        component: './404',
+      },
+    ]
+  },
+  {
     path: '/welcome',
     name: 'welcome',
     icon: 'smile',
@@ -49,32 +69,32 @@
     component: './TableList',
   },
   {
-    path:'/person',
+    path: '/person',
     name: 'person',
-    access:'canIdentity',
+    access: 'canIdentity',
     icon: 'UserOutlined',
-    component:'./Person'
+    component: './Person'
   },
   {
-    path:'/todo',
+    path: '/todo',
     name: 'todo',
-    access:'canIdentity',
+    access: 'canIdentity',
     icon: 'CalendarOutlined',
-    component:'./Todo'
+    component: './Todo'
   },
   {
-    path:'/dashboard',
+    path: '/dashboard',
     name: 'dashboard',
-    access:'canIdentity',
+    access: 'canIdentity',
     icon: 'BarChartOutlined',
-    component:'./Dashboard'
+    component: './Dashboard'
   },
   {
-    path:'/ceshi',
+    path: '/ceshi',
     name: 'ceshi',
-    access:'canIdentity',
+    access: 'canIdentity',
     icon: 'icon-ceshi',
-    component:'./Ceshi'
+    component: './Ceshi'
   },
   {
     path: '/',
