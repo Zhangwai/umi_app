@@ -20,22 +20,28 @@
   },
   {
     path: '/account',
-    component: '../components/AccountLayout',
     layout: false,
     routes: [
       {
-        name: 'account.center',
-        path: '/account/center',
-        component: './user/Center',
-      },
-      {
-        name: 'account.settings',
-        path: '/account/settings',
-        component: './user/Settings',
-      },
-      {
-        component: './404',
-      },
+        path: '/account',
+        component: '../components/AccountLayout',
+        routes: [
+          {
+            name: 'account.center',
+            path: '/account/center',
+            component: './user/Center',
+          },
+          {
+            name: 'account.settings',
+            path: '/account/settings',
+            component: './user/Settings',
+          },
+          {
+            component: './404',
+          },
+        ]
+      }
+
     ]
   },
   {
@@ -64,6 +70,7 @@
   },
   {
     name: 'list.table-list',
+    access: 'canWelcome',
     icon: 'table',
     path: '/list',
     component: './TableList',

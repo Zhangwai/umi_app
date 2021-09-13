@@ -1,8 +1,9 @@
 import { Space } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined, HomeOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useModel, SelectLang, useAccess, Access } from 'umi';
 import Avatar from './AvatarDropdown';
+import { history } from 'umi'
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 
@@ -11,8 +12,9 @@ export type SiderTheme = 'light' | 'dark';
 const GlobalHeaderRight: React.FC = () => {
   const { initialState } = useModel('@@initialState');
   // 组件里面拿到权限
-  const {canIdentity} = useAccess();
-  
+  const { canIdentity, canWelcome } = useAccess();
+
+  const hasMenu = canIdentity || canWelcome
   if (!initialState || !initialState.settings) {
     return null;
   }
@@ -51,12 +53,13 @@ const GlobalHeaderRight: React.FC = () => {
       <span
         className={styles.action}
         onClick={() => {
-          window.open('https://pro.ant.design/docs/getting-started');
+          history.push('/')
         }}
+        style={{ color: 'white' }}
       >
-        <QuestionCircleOutlined />
+        <HomeOutlined />
       </span>
-      <Avatar menu={canIdentity} canIdentity={canIdentity}/>
+      <Avatar menu={hasMenu} canIdentity={canIdentity} />
       <SelectLang className={styles.action} />
     </Space>
   );

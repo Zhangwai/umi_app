@@ -9,6 +9,7 @@ import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import { RequestConfig } from 'umi';
 import { message } from 'antd';
 import { RequestInterceptor, RequestOptionsInit, ResponseError } from 'umi-request';
+import logo from '../public/laotou.svg'
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -136,6 +137,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
+    logo,
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {

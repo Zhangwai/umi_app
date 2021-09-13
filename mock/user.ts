@@ -33,6 +33,7 @@ let data = {
   signature: '海纳百川，有容乃大',
   title: '交互专家',
   group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+  description: '我是一个小游客',
   tags: [
     {
       key: '0',
@@ -93,14 +94,12 @@ export default {
         errorCode: '401',
         errorMessage: '请先登录！',
         success: true,
-        // req_headers:req.headers
       });
       return;
     }
     res.send({
       success: true,
       data,
-      // req_headers:req.headers
     });
   },
   // GET POST 可省略
@@ -139,6 +138,7 @@ export default {
       data.name = '游客.01';
       data.avatar = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
       data.identity = 'admin';
+      data.description = '我是一个小游客';
       return;
     }
     if (password === 'ant.design' && username === 'user') {
@@ -152,6 +152,7 @@ export default {
       data.name = '游客.02';
       data.avatar = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
       data.identity = 'user';
+      data.description = '我是一个小游客';
       return;
     }
     if (password === '123' && username === 'datou') {
@@ -165,6 +166,7 @@ export default {
       data.name = '究极管理员大头';
       data.avatar = '/laotou.svg';
       data.identity = 'maxAdmin';
+      data.description = '这孩子黑虎头似的脸上，生着一对铜铃一般的大眼睛，十分精神。';
       return;
     }
     if (type === 'mobile') {

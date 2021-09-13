@@ -39,7 +39,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
-    if (userInfo) history.goBack()
+    if (userInfo) window.location.replace('/')
   }, [])
 
   const fetchUserInfo = async () => {

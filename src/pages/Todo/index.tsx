@@ -3,11 +3,9 @@ import { useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons'
 import type { ProColumns } from '@ant-design/pro-table';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
-import type { ProFormInstance } from '@ant-design/pro-form';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { connect } from 'dva';
 import { Button, Tooltip, Alert, Modal, message } from 'antd';
-
 const Todo = (props: any) => {
     // console.log(props)
     const { todoModel, getToDoList, addToDoLists, editToDoList } = props;
