@@ -21,7 +21,7 @@ declare namespace API {
     };
     address?: string;
     phone?: string;
-    identity?:string
+    identity?: string
   };
 
   type LoginResult = {
@@ -99,4 +99,8 @@ declare namespace API {
     description?: string;
     type?: NoticeIconItemType;
   };
+  type TagOption = {
+    key?: string,
+    label?: string
+  }
 }

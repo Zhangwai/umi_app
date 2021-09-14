@@ -11,7 +11,20 @@ export async function currentUser(options?: { [key: string]: any }) {
     ...(options || {}),
   });
 }
-
+/**删除个人中心的tag */
+export async function deleteTag(params: { [key: string]: string }) {
+  return request<API.TagOption>('/api/tag/delete', {
+    method: 'POST',
+    data: params
+  })
+}
+/**添加个人中心的tag */
+export async function addTag(params: { [label: string]: string }) {
+  return request<API.TagOption>('/api/tag/add', {
+    method: 'POST',
+    data: params
+  })
+}
 /** 退出登录接口 POST /api/login/outLogin */
 export async function outLogin(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/login/outLogin', {
@@ -85,7 +98,7 @@ export async function removeRule(options?: { [key: string]: any }) {
 }
 /** 获取person列表 GET /api/person*/
 export async function getAllPerson() {
-  return request('/api/person',{
-    method:'GET',
+  return request('/api/person', {
+    method: 'GET',
   })
 }

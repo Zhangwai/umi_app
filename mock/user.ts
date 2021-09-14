@@ -191,6 +191,65 @@ export default {
     access = '';
     res.send({ data: {}, success: true });
   },
+  //删除tags
+  "POST /api/tag/delete": (req: Request, res: Response) => {
+    const { key } = req.body;
+    let isSend = false;
+    data.tags.forEach((item, index) => {
+      if (item.key === key) {
+        data.tags.splice(index, 1);
+        isSend = true;
+        res.status(204).send({
+          status: 204,
+          message: '删除成功',
+          success: { key }
+        });
+      }
+    })
+    if (!isSend) {
+      res.status(404).send({
+        status: 404,
+        error: 'Not Found',
+        message: '找不到这个tag',
+      });
+    }
+  },
+  //添加tags
+  "POST /api/tag/add/": (req: Request, res: Response) => {
+    const { label } = req.body;
+    let isAgain = false;
+    let tooLong = false;
+    if (label.length > 12 || label.length === 0) {
+      tooLong = true;
+      res.status(400).send({
+        status: 400,
+        error: 'error',
+        message: 'tag内容过长或者无内容',
+      })
+    }
+    if (!tooLong) {
+      data.tags.forEach((item) => {
+        if (item.label === label) {
+          isAgain = true;
+          res.status(400).send({
+            status: 400,
+            error: 'error',
+            message: 'tag内容重复',
+          })
+        }
+      })
+    }
+
+    if ((!isAgain) && (!tooLong)) {
+      const id = data.tags.length >= 1 ? Number(data.tags[data.tags.length - 1]['key']) + 1 : 0;
+      data.tags.push({ key: id.toString(), label });
+      res.status(201).send({
+        status: 201,
+        success: 'success',
+        message: 'tag添加成功'
+      })
+    }
+  },
   'POST /api/register': (req: Request, res: Response) => {
     res.send({ status: 'ok', currentAuthority: 'user', success: true });
   },
